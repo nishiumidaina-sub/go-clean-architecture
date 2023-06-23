@@ -29,7 +29,7 @@ observation-system-backend
  |   ├──database
  |   |   ├──sqlhandler.go
  |   |   └──exampleRepository.go
- |   ├──responses
+ |   ├──response
  |   |   ├──errorResponse.go
  |   |   └──exampleResponse.go
  |   └──router
