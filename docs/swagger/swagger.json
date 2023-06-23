@@ -40,7 +40,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/responses.UserLogin"
+                            "$ref": "#/definitions/response.UserLogin"
                         }
                     },
                     "500": {
@@ -48,7 +48,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/responses.Error"
+                                "$ref": "#/definitions/response.Error"
                             }
                         }
                     }
@@ -100,7 +100,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/responses.UserRegister"
+                            "$ref": "#/definitions/response.UserRegister"
                         }
                     },
                     "500": {
@@ -108,7 +108,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/responses.Error"
+                                "$ref": "#/definitions/response.Error"
                             }
                         }
                     }
@@ -145,7 +145,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/responses.UserCheck"
+                            "$ref": "#/definitions/response.UserCheck"
                         }
                     },
                     "500": {
@@ -153,7 +153,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/responses.Error"
+                                "$ref": "#/definitions/response.Error"
                             }
                         }
                     }
@@ -197,7 +197,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/responses.UserDelete"
+                            "$ref": "#/definitions/response.UserDelete"
                         }
                     },
                     "500": {
@@ -205,7 +205,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/responses.Error"
+                                "$ref": "#/definitions/response.Error"
                             }
                         }
                     }
@@ -214,7 +214,7 @@
         }
     },
     "definitions": {
-        "responses.Error": {
+        "response.Error": {
             "type": "object",
             "properties": {
                 "message": {
@@ -222,7 +222,7 @@
                 }
             }
         },
-        "responses.UserCheck": {
+        "response.UserCheck": {
             "type": "object",
             "properties": {
                 "email": {
@@ -236,7 +236,7 @@
                 }
             }
         },
-        "responses.UserDelete": {
+        "response.UserDelete": {
             "type": "object",
             "properties": {
                 "message": {
@@ -244,7 +244,7 @@
                 }
             }
         },
-        "responses.UserLogin": {
+        "response.UserLogin": {
             "type": "object",
             "properties": {
                 "email": {
@@ -264,7 +264,7 @@
                 }
             }
         },
-        "responses.UserRegister": {
+        "response.UserRegister": {
             "type": "object",
             "properties": {
                 "email": {

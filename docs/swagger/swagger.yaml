@@ -1,10 +1,10 @@
 definitions:
-  responses.Error:
+  response.Error:
     properties:
       message:
         type: string
     type: object
-  responses.UserCheck:
+  response.UserCheck:
     properties:
       email:
         type: string
@@ -13,12 +13,12 @@ definitions:
       username:
         type: string
     type: object
-  responses.UserDelete:
+  response.UserDelete:
     properties:
       message:
         type: string
     type: object
-  responses.UserLogin:
+  response.UserLogin:
     properties:
       email:
         type: string
@@ -31,7 +31,7 @@ definitions:
       username:
         type: string
     type: object
-  responses.UserRegister:
+  response.UserRegister:
     properties:
       email:
         type: string
@@ -68,12 +68,12 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/responses.UserLogin'
+            $ref: '#/definitions/response.UserLogin'
         "500":
           description: Internal Server Error
           schema:
             items:
-              $ref: '#/definitions/responses.Error'
+              $ref: '#/definitions/response.Error'
             type: array
       summary: ユーザーログイン
       tags:
@@ -107,12 +107,12 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/responses.UserRegister'
+            $ref: '#/definitions/response.UserRegister'
         "500":
           description: Internal Server Error
           schema:
             items:
-              $ref: '#/definitions/responses.Error'
+              $ref: '#/definitions/response.Error'
             type: array
       summary: ユーザー登録
       tags:
@@ -133,12 +133,12 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/responses.UserCheck'
+            $ref: '#/definitions/response.UserCheck'
         "500":
           description: Internal Server Error
           schema:
             items:
-              $ref: '#/definitions/responses.Error'
+              $ref: '#/definitions/response.Error'
             type: array
       security:
       - ApiKeyAuth: []
@@ -166,12 +166,12 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/responses.UserDelete'
+            $ref: '#/definitions/response.UserDelete'
         "500":
           description: Internal Server Error
           schema:
             items:
-              $ref: '#/definitions/responses.Error'
+              $ref: '#/definitions/response.Error'
             type: array
       security:
       - ApiKeyAuth: []
