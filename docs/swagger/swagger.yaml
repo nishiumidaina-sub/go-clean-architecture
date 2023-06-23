@@ -1,0 +1,181 @@
+definitions:
+  responses.Error:
+    properties:
+      message:
+        type: string
+    type: object
+  responses.UserCheck:
+    properties:
+      email:
+        type: string
+      user_key:
+        type: string
+      username:
+        type: string
+    type: object
+  responses.UserDelete:
+    properties:
+      message:
+        type: string
+    type: object
+  responses.UserLogin:
+    properties:
+      email:
+        type: string
+      message:
+        type: string
+      token:
+        type: string
+      user_key:
+        type: string
+      username:
+        type: string
+    type: object
+  responses.UserRegister:
+    properties:
+      email:
+        type: string
+      message:
+        type: string
+      user_key:
+        type: string
+      username:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /auth/user_login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: パスワード
+        in: body
+        name: password
+        required: true
+        schema:
+          type: string
+      - description: メールアドレス
+        in: body
+        name: email
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.UserLogin'
+        "500":
+          description: Internal Server Error
+          schema:
+            items:
+              $ref: '#/definitions/responses.Error'
+            type: array
+      summary: ユーザーログイン
+      tags:
+      - Auth
+  /auth/user_register:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: ユーザー名
+        in: body
+        name: username
+        required: true
+        schema:
+          type: string
+      - description: パスワード
+        in: body
+        name: password
+        required: true
+        schema:
+          type: string
+      - description: メールアドレス
+        in: body
+        name: email
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.UserRegister'
+        "500":
+          description: Internal Server Error
+          schema:
+            items:
+              $ref: '#/definitions/responses.Error'
+            type: array
+      summary: ユーザー登録
+      tags:
+      - Auth
+  /user/user_check:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Authorization
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.UserCheck'
+        "500":
+          description: Internal Server Error
+          schema:
+            items:
+              $ref: '#/definitions/responses.Error'
+            type: array
+      security:
+      - ApiKeyAuth: []
+      summary: ユーザー取得
+      tags:
+      - User
+  /user/user_delete/{userKey}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: Authorization
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: ユーザーキー
+        in: path
+        name: user_key
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.UserDelete'
+        "500":
+          description: Internal Server Error
+          schema:
+            items:
+              $ref: '#/definitions/responses.Error'
+            type: array
+      security:
+      - ApiKeyAuth: []
+      summary: ユーザー削除
+      tags:
+      - User
+swagger: "2.0"

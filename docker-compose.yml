@@ -1,0 +1,14 @@
+version: '3'
+services:
+  app:
+    build: ./docker/go
+    volumes:
+      - ./:/go/src/app
+    ports:
+      - "8001:8000"
+    tty: true
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD} 
