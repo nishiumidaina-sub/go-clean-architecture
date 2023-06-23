@@ -11,7 +11,7 @@ import (
 	"echo-clean-architecture/domain"
 	"echo-clean-architecture/usecase"
 	"echo-clean-architecture/presentation/database"
-	"echo-clean-architecture/presentation/responses"
+	"echo-clean-architecture/presentation/response"
 )
 
 type UserController struct {
@@ -36,8 +36,8 @@ func NewUserController(sqlHandler database.SqlHandler) *UserController {
 // @Param       username body string true "ユーザー名"
 // @Param       password body string true "パスワード"
 // @Param       email    body string true "メールアドレス"
-// @Success     200  {object} responses.UserRegister
-// @Failure     500  {array}  responses.Error
+// @Success     200  {object} response.UserRegister
+// @Failure     500  {array}  response.Error
 // @Router      /auth/user_register [post]
 func (controller *UserController) Register(c echo.Context) (err error) {
 	u := domain.User{}
@@ -45,12 +45,12 @@ func (controller *UserController) Register(c echo.Context) (err error) {
 
 	user, err := controller.Interactor.UserByEmail(u.Email)
 	if err == nil {
-		return c.JSON(500, responses.NewError(err))
+		return c.JSON(500, response.NewError(err))
 	}
 
 	userKey, err := lib.GenerateKey()
 	if err != nil {
-		return c.JSON(500, responses.NewError(err))
+		return c.JSON(500, response.NewError(err))
 	}
 
 	u.UserKey = userKey
@@ -59,10 +59,10 @@ func (controller *UserController) Register(c echo.Context) (err error) {
 
 	user, err = controller.Interactor.Add(u)
 	if err != nil {
-		return c.JSON(500, responses.NewError(err))
+		return c.JSON(500, response.NewError(err))
 	}
 
-	return c.JSON(200, responses.ToUserRegister(user))
+	return c.JSON(200, response.ToUserRegister(user))
 }
 
 // Login
@@ -72,8 +72,8 @@ func (controller *UserController) Register(c echo.Context) (err error) {
 // @Produce     json
 // @Param       password body string true "パスワード"
 // @Param       email    body string true "メールアドレス"
-// @Success     200  {object} responses.UserLogin
-// @Failure     500  {array}  responses.Error
+// @Success     200  {object} response.UserLogin
+// @Failure     500  {array}  response.Error
 // @Router      /auth/user_login [post]
 func (controller *UserController) Login(c echo.Context) (err error) {
 	u := domain.User{}
@@ -82,12 +82,12 @@ func (controller *UserController) Login(c echo.Context) (err error) {
 	email := u.Email
 	user, err := controller.Interactor.UserByEmail(email)
 	if err != nil {
-		return c.JSON(500, responses.NewError(err))
+		return c.JSON(500, response.NewError(err))
 	}
 	
     err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(u.Password))
 	if err != nil {
-		return c.JSON(500, responses.NewError(err))
+		return c.JSON(500, response.NewError(err))
 	}
 
 	baseToken := jwt.New(jwt.SigningMethodHS256)
@@ -99,10 +99,10 @@ func (controller *UserController) Login(c echo.Context) (err error) {
 	
 	token, err := baseToken.SignedString([]byte("secret"))
 	if err != nil {
-		return c.JSON(500, responses.NewError(err))
+		return c.JSON(500, response.NewError(err))
 	}
 
-	return c.JSON(200, responses.ToUserLogin(user, token))
+	return c.JSON(200, response.ToUserLogin(user, token))
 }
 
 // Check
@@ -112,8 +112,8 @@ func (controller *UserController) Login(c echo.Context) (err error) {
 // @Produce     json
 // @Security    ApiKeyAuth
 // @param       Authorization header string true "Authorization"
-// @Success     200  {object} responses.UserCheck
-// @Failure     500  {array}  responses.Error
+// @Success     200  {object} response.UserCheck
+// @Failure     500  {array}  response.Error
 // @Router      /user/user_check [get]
 func (controller *UserController) Check(c echo.Context) (err error) {
 	baseToken := c.Request().Header.Get("Authorization")
@@ -125,19 +125,19 @@ func (controller *UserController) Check(c echo.Context) (err error) {
 		return []byte("secret"), nil
 	})
 	if err != nil {
-		return c.JSON(500, responses.NewError(err))
+		return c.JSON(500, response.NewError(err))
 	}
 
 	claims, ok := token.Claims.(jwt.MapClaims)
 	if !ok {
-		return c.JSON(500, responses.NewError(fmt.Errorf("Invalid token")))
+		return c.JSON(500, response.NewError(fmt.Errorf("Invalid token")))
 	}
 
 	userKey := claims["user_key"].(string)
 	username := claims["username"].(string)
 	email := claims["email"].(string)
   
-	return c.JSON(200,  responses.ToUserCheck(userKey, username, email))
+	return c.JSON(200,  response.ToUserCheck(userKey, username, email))
 }
 
 // Check
@@ -148,8 +148,8 @@ func (controller *UserController) Check(c echo.Context) (err error) {
 // @Security    ApiKeyAuth
 // @param       Authorization header string true "Authorization"
 // @Param       user_key path int true "ユーザーキー"
-// @Success     200  {object} responses.UserDelete
-// @Failure     500  {array}  responses.Error
+// @Success     200  {object} response.UserDelete
+// @Failure     500  {array}  response.Error
 // @Router      /user/user_delete/{userKey} [delete]
 func (controller *UserController) Delete(c echo.Context) (err error) {
 	userKey := c.Param("userKey")
@@ -157,8 +157,8 @@ func (controller *UserController) Delete(c echo.Context) (err error) {
 
 	err = controller.Interactor.DeleteByUserKey(user)
 	if err != nil {
-		return c.JSON(500, responses.NewError(err))
+		return c.JSON(500, response.NewError(err))
 	}
 
-	return c.JSON(200, responses.ToUserDelete())
+	return c.JSON(200, response.ToUserDelete())
 }
