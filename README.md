@@ -2,7 +2,7 @@
 Go/Echoでクリーンアーキテクチャを頑張るリポジトリ
 ## 構成
 ```
-observation-system-backend
+go-clean-architecture
  ├──docker
  |   └──go
  |      └──Dockerfile
