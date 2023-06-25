@@ -3,6 +3,18 @@ Go/Echoでクリーンアーキテクチャを頑張るリポジトリ
 ## 構成
 ```
 go-clean-architecture
+ ├──api
+ |   ├──controller
+ |   |   ├──context.go
+ |   |   └──exampleControlle.go
+ |   ├──database
+ |   |   ├──sqlhandler.go
+ |   |   └──exampleRepository.go
+ |   ├──response
+ |   |   ├──errorResponse.go
+ |   |   └──exampleResponse.go
+ |   └──router
+ |       └──outer.go
  ├──docker
  |   └──go
  |      └──Dockerfile
@@ -22,18 +34,6 @@ go-clean-architecture
  ├──log
  |   ├──api_debug.log
  |   └──log.go
- ├──presentation
- |   ├──controller
- |   |   ├──context.go
- |   |   └──exampleControlle.go
- |   ├──database
- |   |   ├──sqlhandler.go
- |   |   └──exampleRepository.go
- |   ├──response
- |   |   ├──errorResponse.go
- |   |   └──exampleResponse.go
- |   └──router
- |       └──outer.go
  ├──usecase
  |   ├──exampleInteractor.go
  |   └──exampleRepository.go
