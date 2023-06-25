@@ -7,14 +7,24 @@ go-clean-architecture
  |   ├──controller
  |   |   ├──context.go
  |   |   └──exampleControlle.go
- |   ├──database
- |   |   ├──sqlhandler.go
- |   |   └──exampleRepository.go
+ |   ├──middleware
+ |   |   └──exampleMiddleware.go
  |   ├──response
  |   |   ├──errorResponse.go
  |   |   └──exampleResponse.go
  |   └──router
- |       └──outer.go
+ |       └──router.go
+ ├──cmd
+ |   ├──controller
+ |   |   ├──context.go
+ |   |   └──exampleControlle.go
+ |   ├──response
+ |   |   ├──errorResponse.go
+ |   |   └──exampleResponse.go
+ |   └──exampleCommand.go
+ ├──database
+ |   ├──sqlhandler.go
+ |   └──exampleRepository.go
  ├──docker
  |   └──go
  |      └──Dockerfile
