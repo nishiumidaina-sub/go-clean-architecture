@@ -1,7 +1,7 @@
 package main
 
 import (
-	"echo-clean-architecture/presentation/router"
+	"echo-clean-architecture/api/router"
 )
 
 func main() {

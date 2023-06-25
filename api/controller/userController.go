@@ -10,8 +10,8 @@ import (
 	"echo-clean-architecture/lib"
 	"echo-clean-architecture/domain"
 	"echo-clean-architecture/usecase"
-	"echo-clean-architecture/presentation/database"
-	"echo-clean-architecture/presentation/response"
+	"echo-clean-architecture/api/database"
+	"echo-clean-architecture/api/response"
 )
 
 type UserController struct {

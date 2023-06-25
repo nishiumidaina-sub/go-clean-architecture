@@ -5,14 +5,14 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 
 	"echo-clean-architecture/log"
-	"echo-clean-architecture/infrastucture"
-	"echo-clean-architecture/presentation/controller"
+	"echo-clean-architecture/infrastructure"
+	"echo-clean-architecture/api/controller"
 	_ "echo-clean-architecture/docs/swagger"
 	echoSwagger "github.com/swaggo/echo-swagger"
 )
 
 func Init() *echo.Echo {
-	userController := controller.NewUserController(infrastucture.NewSqlHandler())
+	userController := controller.NewUserController(infrastructure.NewSqlHandler())
 
 	e := echo.New()
 

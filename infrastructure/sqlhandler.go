@@ -1,4 +1,4 @@
-package infrastucture
+package infrastructure
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 
-	"echo-clean-architecture/presentation/database"
+	"echo-clean-architecture/api/database"
 )
 
 type SqlHandler struct {
